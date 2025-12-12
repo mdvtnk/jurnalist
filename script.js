@@ -294,7 +294,43 @@ document.addEventListener('DOMContentLoaded', function() {
   setupNavigation();
   setupModal();
   setupImageLoading();
+  setupSearchSticky();
 });
+
+// Настройка закрепления поля поиска внизу при прокрутке
+function setupSearchSticky() {
+  const searchBar = document.querySelector('.search-bar');
+  const initialTop = searchBar.offsetTop;
+  
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > initialTop + 100) {
+      searchBar.classList.add('sticky');
+    } else {
+      searchBar.classList.remove('sticky');
+    }
+  });
+}
+
+// Функция для получения пути к изображению
+function getImagePath(law) {
+  const id = law.id;
+  let imageName = '';
+  
+  if (id.startsWith('obligation')) {
+    const num = id.replace('obligation', '');
+    imageName = `obyazanosti${num}.jpg`;
+  } else if (id.startsWith('right')) {
+    const num = id.replace('right', '');
+    imageName = `prav${num}.jpg`;
+  } else if (id.startsWith('principle')) {
+    const num = id.replace('principle', '');
+    imageName = `princip${num}.jpg`;
+  }
+  
+  return imageName ? `img/${imageName}` : '';
+}
 
 // Генерация карточек
 function generateCards() {
@@ -308,6 +344,9 @@ function generateCards() {
     card.style.animationDelay = `${index * 0.1}s`;
     
     const emoji = law.emoji || "📰";
+    const imagePath = getImagePath(law);
+    const imageHtml = imagePath ? `<img src="${imagePath}" alt="${law.title}" class="card-image" onerror="this.style.display='none'">` : '';
+    
     card.innerHTML = `
       <div class="card-emoji-bg">${emoji}</div>
       <div class="card-emoji-main">${emoji}</div>
@@ -316,6 +355,7 @@ function generateCards() {
         <h2>${law.title}</h2>
         <p>${law.short}</p>
       </div>
+      ${imageHtml}
     `;
     
     card.addEventListener('click', () => openModal(law));
@@ -405,6 +445,7 @@ function openModal(law) {
   const modalText = document.getElementById('modalText');
   
   const emoji = law.emoji || "📰";
+  const imagePath = getImagePath(law);
   
   // Добавляем эмодзи в заголовок
   modalTitle.innerHTML = `<span class="modal-emoji">${emoji}</span> ${law.title}`;
@@ -424,7 +465,9 @@ function openModal(law) {
     })
     .join('');
   
-  modalText.innerHTML = formattedText;
+  // Добавляем изображение в модальное окно
+  const imageHtml = imagePath ? `<img src="${imagePath}" alt="${law.title}" class="modal-image" onerror="this.style.display='none'">` : '';
+  modalText.innerHTML = formattedText + imageHtml;
   
   modalBg.classList.add('active');
   document.body.style.overflow = 'hidden';

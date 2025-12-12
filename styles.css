@@ -32,9 +32,6 @@ body {
   color: #fff;
   padding: 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 100;
   animation: slideDown 0.5s ease-out;
 }
 
@@ -68,8 +65,13 @@ body {
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  padding-top: 15px;
+  padding: 15px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link {
@@ -113,6 +115,29 @@ body {
   animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
+.search-bar.sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 15px 20px;
+  z-index: 99;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -126,12 +151,13 @@ body {
 
 .search-bar input {
   width: 100%;
+
   padding: 16px 50px 16px 20px;
   border-radius: 12px;
   border: 2px solid transparent;
   font-size: 16px;
   background: var(--card-bg);
-  box-shadow: var(--shadow);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transition: var(--transition);
   font-family: "Inter", sans-serif;
 }
@@ -155,7 +181,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 40px auto;
-  padding: 0 20px;
+  padding: 0 20px 100px 20px;
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -259,6 +285,16 @@ body {
   position: relative;
   z-index: 2;
   background: var(--card-bg);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 20px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  object-fit: cover;
+  max-height: 200px;
 }
 
 .card h2 {
@@ -421,6 +457,17 @@ body {
   opacity: 0.6;
 }
 
+.modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 30px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+  max-height: 400px;
+  box-shadow: var(--shadow);
+}
+
 .modal-content .modal-list {
   list-style: none;
   padding: 0;
@@ -495,6 +542,10 @@ body {
     margin: 20px auto;
   }
 
+  .search-bar.sticky {
+    padding: 12px 15px;
+  }
+
   .search-bar input {
     padding: 14px 45px 14px 18px;
     font-size: 15px;
@@ -513,11 +564,16 @@ body {
 
   .main-nav {
     gap: 10px;
+    padding: 12px 15px;
   }
 
   .nav-link {
     font-size: 13px;
     padding: 5px 10px;
+  }
+
+  .search-bar.sticky {
+    padding: 10px 15px;
   }
 
   .card-emoji-main {
