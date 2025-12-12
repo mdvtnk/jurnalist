@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Законы журналистики</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-content">
+      <h1>Законы журналистики</h1>
+      <nav class="main-nav">
+        <a href="#obligations" class="nav-link">Обязанности</a>
+        <a href="#rights" class="nav-link">Права</a>
+        <a href="#principles" class="nav-link">Принципы</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Поиск по законам..." />
+    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.35-4.35"></path>
+    </svg>
+  </div>
+
+  <div class="container" id="cardsContainer">
+    <!-- JS заполнит карточки -->
+  </div>
+
+  <div class="modal-bg" id="modalBg">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Закрыть">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <div id="modalText"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
